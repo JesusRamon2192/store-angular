@@ -15,6 +15,7 @@ export class CounterComponent {
   constructor() {
     // NO ASYNC
     // before render
+    // una ves
     console.log('constructor');
     console.log('-'.repeat(10));
   }
@@ -24,5 +25,27 @@ export class CounterComponent {
     console.log('ngOnChanges');
     console.log('-'.repeat(10));
     console.log(changes);
+  }
+
+  ngOnInit() {
+    // after render
+    // una ves
+    // async, then7 subs
+    console.log('ngOnInit');
+    console.log('-'.repeat(10));
+    console.log('duration =>', this.duration);
+    console.log('message =>', this.message);
+  }
+
+  ngAfterViewInit() {
+    // after render
+    // hijos ya fueron renderizados
+    console.log('ngAfterViewInit');
+    console.log('-'.repeat(10));
+  }
+
+  ngOnDestroy() {
+    console.log('ngOnDestroy');
+    console.log('-'.repeat(10));
   }
 }
