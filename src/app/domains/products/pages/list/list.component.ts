@@ -12,11 +12,16 @@ import { Category } from '@shared/models/category.model';
 @Component({
   selector: 'app-list',
   standalone: true,
-  imports: [CommonModule, ProductComponent, HeaderComponent, RouterLinkWithHref],
+  imports: [
+    CommonModule,
+    ProductComponent,
+    HeaderComponent,
+    RouterLinkWithHref,
+  ],
   templateUrl: './list.component.html',
   styleUrl: './list.component.css',
 })
-export class ListComponent {
+export default class ListComponent {
   products = signal<Product[]>([]);
   categories = signal<Category[]>([]);
   private cartService = inject(CartService);
@@ -30,15 +35,15 @@ export class ListComponent {
 
   ngOnChanges(changes: SimpleChanges) {
     //console.log(this.category_id);
-    
-      this.getProducts();
+
+    this.getProducts();
   }
 
   addToCart(product: Product) {
     this.cartService.addToCart(product);
   }
 
-  private getProducts(){
+  private getProducts() {
     this.productService.getProducts(this.category_id).subscribe({
       next: (products) => {
         this.products.set(products);
@@ -47,7 +52,7 @@ export class ListComponent {
     });
   }
 
-  private getCategories(){
+  private getCategories() {
     this.categoryService.getAll().subscribe({
       next: (data) => {
         this.categories.set(data);
